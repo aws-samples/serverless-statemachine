@@ -63,6 +63,8 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 sudo ./aws/install
 
+# Setup credentials
+aws configure
 
 # Clone the serverless-statemachine repo.
 git clone https://github.com/aws-samples/serverless-statemachine.git
