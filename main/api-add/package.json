@@ -1,0 +1,9 @@
+{
+  "name": "api-add",
+  "version": "1.0.0",
+  "description": "Interface lambda to add a new state machine.",
+  "main": "index.js",
+  "author": "Sureshkumar K V",
+  "license": "MIT",
+  "dependencies": {}
+}

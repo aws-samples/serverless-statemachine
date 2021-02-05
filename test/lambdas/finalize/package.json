@@ -1,0 +1,9 @@
+{
+  "name": "finalize",
+  "version": "1.0.0",
+  "description": "Lambda for the last stage of the test state machine.",
+  "main": "index.js",
+  "author": "Sureshkumar K V",
+  "license": "MIT",
+  "dependencies": {}
+}

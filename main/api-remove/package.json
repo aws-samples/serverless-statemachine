@@ -1,0 +1,9 @@
+{
+  "name": "api-remove",
+  "version": "1.0.0",
+  "description": "Interface lambda to remove a state machine.",
+  "main": "index.js",
+  "author": "Sureshkumar K V",
+  "license": "MIT",
+  "dependencies": {}
+}

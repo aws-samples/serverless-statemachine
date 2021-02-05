@@ -1,0 +1,9 @@
+{
+  "name": "worker",
+  "version": "1.0.0",
+  "description": "This lambda implements state changes for the state machine.",
+  "main": "index.js",
+  "author": "Sureshkumar K V",
+  "license": "MIT",
+  "dependencies": {}
+}

@@ -1,0 +1,63 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  serverless-statemachine-test
+
+  Test lambdas Template for serverless-statemachine.
+  
+Globals:
+  Function:
+    Timeout: 900
+
+Resources:
+  PrepareFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: prepare/
+      Handler: index.handler
+      Runtime: nodejs12.x
+
+  Stage1Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: stage-1/
+      Handler: index.handler
+      Runtime: nodejs12.x
+
+  Stage2aFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: stage-2a/
+      Handler: index.handler
+      Runtime: nodejs12.x
+
+  Stage2bFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: stage-2b/
+      Handler: index.handler
+      Runtime: nodejs12.x
+
+  FinalizeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: finalize/
+      Handler: index.handler
+      Runtime: nodejs12.x
+
+Outputs:
+  PrepareFunction:
+    Description: "PrepareFunction arn"
+    Value: !GetAtt PrepareFunction.Arn
+  Stage1Function:
+    Description: "Stage1Function arn"
+    Value: !GetAtt Stage1Function.Arn
+  Stage2aFunction:
+    Description: "Stage2aFunction arn"
+    Value: !GetAtt Stage2aFunction.Arn
+  Stage2bFunction:
+    Description: "Stage2bFunction arn"
+    Value: !GetAtt Stage2bFunction.Arn
+  FinalizeFunction:
+    Description: "FinalizeFunction arn"
+    Value: !GetAtt FinalizeFunction.Arn

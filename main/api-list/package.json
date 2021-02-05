@@ -1,0 +1,9 @@
+{
+  "name": "api-list",
+  "version": "1.0.0",
+  "description": "Interface lambda to get the list of active state machines.",
+  "main": "index.js",
+  "author": "Sureshkumar K V",
+  "license": "MIT",
+  "dependencies": {}
+}

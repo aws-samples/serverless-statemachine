@@ -1,0 +1,9 @@
+{
+  "name": "api-get",
+  "version": "1.0.0",
+  "description": "Interface lambda to get a state machine.",
+  "main": "index.js",
+  "author": "Sureshkumar K V",
+  "license": "MIT",
+  "dependencies": {}
+}

@@ -1,0 +1,130 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  serverless-statemachine
+
+  Sample Template for serverless-statemachine.
+  
+Globals:
+  Function:
+    Timeout: 900
+
+Resources:
+  ServerlessStatemachineTable:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - AttributeName: id
+          AttributeType: S
+      KeySchema: 
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode:
+        PAY_PER_REQUEST
+      SSESpecification:
+        SSEEnabled: true
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+
+  ServerlessStatemachineDeadLetterQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      VisibilityTimeout: 900
+      KmsMasterKeyId: alias/aws/sqs
+
+  ServerlessStatemachineQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      VisibilityTimeout: 900
+      KmsMasterKeyId: alias/aws/sqs
+      RedrivePolicy:
+        deadLetterTargetArn: !GetAtt ServerlessStatemachineDeadLetterQueue.Arn
+        maxReceiveCount: 1
+
+  ApiAddFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: api-add/
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Policies:
+      - AmazonSQSFullAccess
+      - AmazonDynamoDBFullAccess
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref ServerlessStatemachineTable
+          QUEUE_URL: !Ref ServerlessStatemachineQueue
+
+  ApiGetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: api-get/
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Policies:
+      - AmazonDynamoDBReadOnlyAccess
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref ServerlessStatemachineTable
+          QUEUE_URL: !Ref ServerlessStatemachineQueue
+
+  ApiListFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: api-list/
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Policies:
+      - AmazonDynamoDBReadOnlyAccess
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref ServerlessStatemachineTable
+          QUEUE_URL: !Ref ServerlessStatemachineQueue
+
+  ApiDeleteFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: api-remove/
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Policies:
+      - AmazonDynamoDBFullAccess
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref ServerlessStatemachineTable
+          QUEUE_URL: !Ref ServerlessStatemachineQueue
+
+  WorkerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: worker/
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Policies:
+      - AmazonSQSFullAccess
+      - AWSLambdaFullAccess
+      - AmazonDynamoDBFullAccess
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref ServerlessStatemachineTable
+          QUEUE_URL: !Ref ServerlessStatemachineQueue
+      Events:
+        SQSTriggerEvent:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt ServerlessStatemachineQueue.Arn
+            BatchSize: 1
+
+Outputs:
+  ApiAddFunction:
+    Description: "ARN of the ApiAddFunction."
+    Value: !GetAtt ApiAddFunction.Arn
+  ApiGetFunction:
+    Description: "ARN of the ApiGetFunction."
+    Value: !GetAtt ApiGetFunction.Arn
+  ApiListFunction:
+    Description: "ARN of the ApiListFunction."
+    Value: !GetAtt ApiListFunction.Arn
+  ApiDeleteFunction:
+    Description: "ARN of the ApiDeleteFunction."
+    Value: !GetAtt ApiDeleteFunction.Arn

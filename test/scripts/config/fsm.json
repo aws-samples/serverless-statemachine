@@ -1,0 +1,11 @@
+{
+    "object": {},
+    "config": {
+        "START": "arn:aws:lambda:ap-south-1:263517404808:function:sam-app-test-PrepareFunction-1RWSBJGKFCN9X",
+        "TASK-1": "arn:aws:lambda:ap-south-1:263517404808:function:sam-app-test-Stage1Function-1EB81U3L7D7HG",
+        "TASK-2a": "arn:aws:lambda:ap-south-1:263517404808:function:sam-app-test-Stage2aFunction-PZGQKRXUI4ZR",
+        "TASK-2b": "arn:aws:lambda:ap-south-1:263517404808:function:sam-app-test-Stage2bFunction-1NL0BDLDNVSKB",
+        "FINALIZE": "arn:aws:lambda:ap-south-1:263517404808:function:sam-app-test-FinalizeFunction-1NC0VLQ5TE92Q"
+    },
+    "state": "START"
+}
