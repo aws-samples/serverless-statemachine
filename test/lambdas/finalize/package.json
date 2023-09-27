@@ -1,5 +1,5 @@
 {
-  "name": "finalize",
+  "name": "@aws-samples/finalize",
   "version": "1.0.0",
   "description": "Lambda for the last stage of the test state machine.",
   "main": "index.js",

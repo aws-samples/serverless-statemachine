@@ -1,5 +1,5 @@
 {
-  "name": "api-get",
+  "name": "@aws-samples/api-get",
   "version": "1.0.0",
   "description": "Interface lambda to get a state machine.",
   "main": "index.js",

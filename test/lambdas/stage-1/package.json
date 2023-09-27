@@ -1,5 +1,5 @@
 {
-  "name": "state-1",
+  "name": "@aws-samples/state-1",
   "version": "1.0.0",
   "description": "Lambda for the step-1 of the test state machine.",
   "main": "index.js",
