@@ -1,5 +1,5 @@
 {
-  "name": "api-add",
+  "name": "@aws-samples/api-add",
   "version": "1.0.0",
   "description": "Lambda for the step-2b of the test state machine.",
   "main": "index.js",

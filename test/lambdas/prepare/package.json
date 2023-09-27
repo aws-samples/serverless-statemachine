@@ -1,5 +1,5 @@
 {
-  "name": "prepare",
+  "name": "@aws-samples/prepare",
   "version": "1.0.0",
   "description": "Lambda for the initial stage of the test state machine.",
   "main": "index.js",

@@ -1,5 +1,5 @@
 {
-  "name": "api-add",
+  "name": "@aws-samples/api-add",
   "version": "1.0.0",
   "description": "Interface lambda to add a new state machine.",
   "main": "index.js",
